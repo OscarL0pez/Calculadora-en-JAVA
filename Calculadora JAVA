@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class JuegoAhorcado {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String palabra = "java";
+        StringBuilder palabraAdivinada = new StringBuilder("_".repeat(palabra.length()));
+        int intentos = 6;
+
+        System.out.println("¡Bienvenido al Juego del Ahorcado!");
+
+        while (intentos > 0 && palabraAdivinada.toString().contains("_")) {
+            System.out.println("Palabra: " + palabraAdivinada);
+            System.out.print("Ingresa una letra: ");
+            char letra = scanner.next().charAt(0);
+
+            if (palabra.contains(String.valueOf(letra))) {
+                for (int i = 0; i < palabra.length(); i++) {
+                    if (palabra.charAt(i) == letra) {
+                        palabraAdivinada.setCharAt(i, letra);
+                    }
+                }
+            } else {
+                intentos--;
+                System.out.println("¡Letra incorrecta! Te quedan " + intentos + " intentos.");
+            }
+        }
+
+        if (palabraAdivinada.toString().equals(palabra)) {
+            System.out.println("¡Felicidades, ganaste! La palabra es: " + palabra);
+        } else {
+            System.out.println("Perdiste. La palabra era: " + palabra);
+        }
+
+        scanner.close();
+    }
+}
